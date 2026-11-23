@@ -1,0 +1,10 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { products, filterProducts, cartTotal, restoreCart } from './model.js';
+test('search ignores case and whitespace',()=>assert.equal(filterProducts(products,'  KEYBOARD  ')[0].id,'form-keyboard'));
+test('category and search combine',()=>assert.equal(filterProducts(products,'keyboard','Lifestyle').length,0));
+test('sort returns ascending prices without mutating source',()=>{const copy=[...products];const sorted=filterProducts(products,'','All','price-asc');assert.equal(sorted[0].id,'daily-notebook');assert.deepEqual(products,copy);});
+test('totals use integer cents',()=>assert.equal(cartTotal({'arc-lamp':2,'slow-mug':1}),16000));
+test('corrupt storage is safe',()=>{for(const raw of ['oops','null','[]','42'])assert.deepEqual(restoreCart(raw),{});});
+test('unknown IDs and invalid quantities are ignored',()=>assert.deepEqual(restoreCart(JSON.stringify({'arc-lamp':2,'slow-mug':-1,'daily-notebook':1.5,unknown:4})),{'arc-lamp':2}));
+test('stored quantities are capped',()=>assert.deepEqual(restoreCart('{"arc-lamp":500}'),{'arc-lamp':9}));
