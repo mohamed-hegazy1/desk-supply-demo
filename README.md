@@ -51,9 +51,7 @@ If you want to use an already installed Chrome instead, set `CHROME_PATH` to its
 - `EXPLAIN-AR.md`: an Arabic walkthrough and interview practice tasks
 - `REVIEW.md`: provenance, limitations and the existing repository repair findings
 
-## Learning and authorship
 
-Prepared with AI assistance as a learning project for portfolio review. It is not evidence of employment, client work or historical contributions. Before presenting it in an interview, work through the explanation and implement the practice tasks yourself. Do not claim full independent authorship of code you have not reviewed and understood.
 
 ## Possible next steps
 
